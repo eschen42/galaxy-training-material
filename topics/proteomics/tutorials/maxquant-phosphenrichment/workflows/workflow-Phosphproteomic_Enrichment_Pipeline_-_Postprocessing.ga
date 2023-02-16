@@ -1,0 +1,555 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Post-MaxQuant half of phosphoproteomic enrichment data processing workflow: Preprocess results and produce ANOVA/KSEA report",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0002-2882-0508",
+            "name": "Art Eschenlauer"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Phosphproteomic Enrichment Pipeline - Postprocessing",
+    "steps": {
+        "0": {
+            "annotation": "Choose which type of phosphoenrichment was performed, pST or pY",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Choose which type of phosphoenrichment was performed, pST or pY",
+                    "name": "[PARAM] phosphoenrichment (pST or pY)"
+                }
+            ],
+            "label": "[PARAM] phosphoenrichment (pST or pY)",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 3.43798308094523,
+                "top": 35.16442679503575
+            },
+            "tool_id": null,
+            "tool_state": "{\"restrictions\": [\"pST\", \"pY\"], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "19b3dfe3-b04e-4586-8125-1517539217e7",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "FASTA sequences of expected non-contaminating peptides",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "FASTA sequences of expected non-contaminating peptides",
+                    "name": "FASTA valid phosphopeptides"
+                }
+            ],
+            "label": "FASTA valid phosphopeptides",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0.0,
+                "top": 163.43422107097814
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"fasta\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "5c5f1a39-b9ee-4098-98ee-667dc78edfe0",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "Tabular file \"./combined/txt/Phospho (STY)Sites.txt\" extracted from the zipfile produced by MaxQuant",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Tabular file \"./combined/txt/Phospho (STY)Sites.txt\" extracted from the zipfile produced by MaxQuant",
+                    "name": "phospho_STY_sites.tabular"
+                }
+            ],
+            "label": "phospho_STY_sites.tabular",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 272.1412213928497,
+                "top": 0.0
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"tabular\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "ec6aa7fa-c38d-4012-bc87-d7e426e6ae64",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "Static NetworKIN data file (see MaxQuant Phosphopeptide Preprocessing tool help for more info",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Static NetworKIN data file (see MaxQuant Phosphopeptide Preprocessing tool help for more info",
+                    "name": "NetworKIN"
+                }
+            ],
+            "label": "NetworKIN",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 386.97681512533285,
+                "top": 267.67563071486126
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"tabular\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "b4ecc597-af98-4c53-8ba7-ec709df648c1",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "Static pSTY_Motifsdata file (see MaxQuant Phosphopeptide Preprocessing tool help for more info",
+            "content_id": null,
+            "errors": null,
+            "id": 4,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Static pSTY_Motifsdata file (see MaxQuant Phosphopeptide Preprocessing tool help for more info",
+                    "name": "pSTY_Motifs"
+                }
+            ],
+            "label": "pSTY_Motifs",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 376.92448911110915,
+                "top": 358.0343819519864
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"tabular\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "5bf79c79-09c9-4202-9b70-1897e86a0733",
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "Static PSP Kinase-Substrate data file (see MaxQuant Phosphopeptide Preprocessing tool help for more info",
+            "content_id": null,
+            "errors": null,
+            "id": 5,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Static PSP Kinase-Substrate data file (see MaxQuant Phosphopeptide Preprocessing tool help for more info",
+                    "name": "PSP Kinase-Substrate"
+                }
+            ],
+            "label": "PSP Kinase-Substrate",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 380.77353575839055,
+                "top": 458.4828021815005
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"tabular\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "06304482-109a-4504-987d-9f4cf8af41cb",
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "Static PSP Regulatory Sites data file (see MaxQuant Phosphopeptide Preprocessing tool help for more info",
+            "content_id": null,
+            "errors": null,
+            "id": 6,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Static PSP Regulatory Sites data file (see MaxQuant Phosphopeptide Preprocessing tool help for more info",
+                    "name": "PSP Regulatory"
+                }
+            ],
+            "label": "PSP Regulatory",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 402.8400711949096,
+                "top": 552.9334748272404
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"tabular\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "adaceb13-af99-47ef-b11b-ff1e9ebfff06",
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "Alpha cutoff levels for ANOVA for enriched phosphopeptides",
+            "content_id": null,
+            "errors": null,
+            "id": 7,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Alpha cutoff levels for ANOVA for enriched phosphopeptides",
+                    "name": "ANOVA alpha-levels"
+                }
+            ],
+            "label": "ANOVA alpha-levels",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 409.62256872065933,
+                "top": 1002.4477184620673
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"tabular\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "295fe80e-0bea-4510-9afd-e4fb3fc72fd0",
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "PERL regular expression matching sample-name portion of intensity column name, e.g.: \\.\\d+[A-Z]$",
+            "content_id": null,
+            "errors": null,
+            "id": 8,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "PERL regular expression matching sample-name portion of intensity column name, e.g.: \\.\\d+[A-Z]$",
+                    "name": "[PARAM] sample-name extraction pattern"
+                }
+            ],
+            "label": "[PARAM] sample-name extraction pattern",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 451.4573785756201,
+                "top": 1114.592701864884
+            },
+            "tool_id": null,
+            "tool_state": "{\"suggestions\": [\"\\\\.\\\\d+[A-Z]$\"], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "11ea7cd3-9e41-4103-9626-0b12620e22f2",
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "PERL regular expression matching sample-group portion of sample-name, e.g.: \\.\\d+",
+            "content_id": null,
+            "errors": null,
+            "id": 9,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "PERL regular expression matching sample-group portion of sample-name, e.g.: \\.\\d+",
+                    "name": "[PARAM] sample-group extraction pattern"
+                }
+            ],
+            "label": "[PARAM] sample-group extraction pattern",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 490.4147776787591,
+                "top": 1240.582949377496
+            },
+            "tool_id": null,
+            "tool_state": "{\"suggestions\": [\"\\\\.\\\\d+\"], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "c7cc6f91-54c0-4db2-acc4-2d231673ca53",
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "Preprocess pSTY sites file from MaxQuant",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/mqppep_preproc/mqppep_preproc/0.1.17+galaxy0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "networkin": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "p_sty_motifs": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "phosphoSites": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "protein_fasta": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "psp_kinase_substrate": {
+                    "id": 5,
+                    "output_name": "output"
+                },
+                "psp_regulatory_sites": {
+                    "id": 6,
+                    "output_name": "output"
+                },
+                "pst_py_selector": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MaxQuant Phosphopeptide Preprocessing",
+            "outputs": [
+                {
+                    "name": "phosphoPepIntensities",
+                    "type": "tabular"
+                },
+                {
+                    "name": "enrichGraph",
+                    "type": "pdf"
+                },
+                {
+                    "name": "locProbCutoffGraph",
+                    "type": "pdf"
+                },
+                {
+                    "name": "enrichGraph_svg",
+                    "type": "svg"
+                },
+                {
+                    "name": "locProbCutoffGraph_svg",
+                    "type": "svg"
+                },
+                {
+                    "name": "filteredData_tabular",
+                    "type": "tabular"
+                },
+                {
+                    "name": "quantData_tabular",
+                    "type": "tabular"
+                },
+                {
+                    "name": "mapped_phophopeptides",
+                    "type": "tabular"
+                },
+                {
+                    "name": "melted_phophopeptide_map",
+                    "type": "tabular"
+                },
+                {
+                    "name": "mqppep_output_sqlite",
+                    "type": "sqlite"
+                },
+                {
+                    "name": "preproc_tab",
+                    "type": "tabular"
+                },
+                {
+                    "name": "preproc_csv",
+                    "type": "csv"
+                },
+                {
+                    "name": "preproc_sqlite",
+                    "type": "sqlite"
+                }
+            ],
+            "position": {
+                "left": 638.8079382378958,
+                "top": 90.20925958060364
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/mqppep_preproc/mqppep_preproc/0.1.17+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "bae3a23461c9",
+                "name": "mqppep_preproc",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"collapse_func\": \"sum\", \"intervalCol\": \"1\", \"localProbCutoff\": \"0.75\", \"merge_function\": \"sum\", \"networkin\": {\"__class__\": \"ConnectedValue\"}, \"p_sty_motifs\": {\"__class__\": \"ConnectedValue\"}, \"phosphoCol\": \"^Number of Phospho [(]STY[)]$\", \"phosphoSites\": {\"__class__\": \"ConnectedValue\"}, \"protein_fasta\": {\"__class__\": \"ConnectedValue\"}, \"psp_kinase_substrate\": {\"__class__\": \"ConnectedValue\"}, \"psp_regulatory_sites\": {\"__class__\": \"ConnectedValue\"}, \"pst_py_selector\": {\"__class__\": \"ConnectedValue\"}, \"species\": \"human\", \"startCol\": \"^Intensity[^_]\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.17+galaxy0",
+            "type": "tool",
+            "uuid": "b0edd916-dba1-40ab-ac0f-036728eda2cc",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "preproc_tab",
+                    "uuid": "87089730-bc41-4095-8979-15c1e7c59960"
+                },
+                {
+                    "label": null,
+                    "output_name": "mapped_phophopeptides",
+                    "uuid": "76cfb191-968e-49c5-bc4f-f91b9ce7086d"
+                },
+                {
+                    "label": null,
+                    "output_name": "preproc_csv",
+                    "uuid": "b17ba0e7-19a1-4356-b722-91c7ea6037b8"
+                },
+                {
+                    "label": null,
+                    "output_name": "locProbCutoffGraph_svg",
+                    "uuid": "70a93bfa-1e3f-4776-9bcc-1d8c9ae34976"
+                },
+                {
+                    "label": null,
+                    "output_name": "melted_phophopeptide_map",
+                    "uuid": "9014f006-1856-40ae-8610-9f98bab734e5"
+                },
+                {
+                    "label": null,
+                    "output_name": "preproc_sqlite",
+                    "uuid": "42be7d16-e205-48dd-843b-f044c87ab12e"
+                },
+                {
+                    "label": null,
+                    "output_name": "quantData_tabular",
+                    "uuid": "3813e074-b8c0-4a96-bdca-2d334de62821"
+                },
+                {
+                    "label": null,
+                    "output_name": "filteredData_tabular",
+                    "uuid": "b0fac729-d08a-45b4-ab96-31f95941a90e"
+                },
+                {
+                    "label": null,
+                    "output_name": "mqppep_output_sqlite",
+                    "uuid": "32a989a0-39d3-42a3-aa3d-1556291b3a82"
+                },
+                {
+                    "label": null,
+                    "output_name": "enrichGraph",
+                    "uuid": "5f706977-7177-4e6e-873d-e52d65db975e"
+                },
+                {
+                    "label": null,
+                    "output_name": "phosphoPepIntensities",
+                    "uuid": "b1f0a68a-e73f-4bcb-97a6-0efd96367f70"
+                },
+                {
+                    "label": null,
+                    "output_name": "locProbCutoffGraph",
+                    "uuid": "2195e43f-5578-4e1e-bb05-0048b585e8e1"
+                },
+                {
+                    "label": null,
+                    "output_name": "enrichGraph_svg",
+                    "uuid": "5a445acb-fac9-4e9f-b3cf-cb97647fcf57"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "Run ANOVA and KSEA on preprocessed phosphoproteomic data.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/mqppep_anova/mqppep_anova/0.1.17+galaxy0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "alpha_file": {
+                    "id": 7,
+                    "output_name": "output"
+                },
+                "input_file": {
+                    "id": 10,
+                    "output_name": "preproc_tab"
+                },
+                "preproc_sqlite": {
+                    "id": 10,
+                    "output_name": "preproc_sqlite"
+                },
+                "sample_grouping_regex": {
+                    "id": 9,
+                    "output_name": "output"
+                },
+                "sample_names_regex": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MaxQuant Phosphopeptide ANOVA",
+            "outputs": [
+                {
+                    "name": "ksea_sqlite",
+                    "type": "sqlite"
+                },
+                {
+                    "name": "anova_ksea_metadata",
+                    "type": "tabular"
+                },
+                {
+                    "name": "imputed_data_file",
+                    "type": "tabular"
+                },
+                {
+                    "name": "imp_qn_lt_file",
+                    "type": "tabular"
+                },
+                {
+                    "name": "report_file",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 896.9730325878468,
+                "top": 952.5971861698167
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/mqppep_anova/mqppep_anova/0.1.17+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "dda27b9273a8",
+                "name": "mqppep_anova",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"alpha_file\": {\"__class__\": \"ConnectedValue\"}, \"group_filter\": {\"group_filter_method\": \"none\", \"__current_case__\": 0}, \"imputation\": {\"imputation_method\": \"random\", \"__current_case__\": 3, \"meanPercentile\": \"1\", \"sdPercentile\": \"1.0\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"intensity_column_regex\": \"^Intensity[^_]\", \"intnsty_min_vals_per_smpl_grp\": \"1\", \"ksea_cutoff_threshold\": \"0.05\", \"ksea_min_quality\": \"0\", \"ksea_min_substrate_count\": \"1\", \"ksea_use_absolute_log2_fc\": \"false\", \"preproc_sqlite\": {\"__class__\": \"ConnectedValue\"}, \"sample_grouping_regex\": {\"__class__\": \"ConnectedValue\"}, \"sample_names_regex\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.17+galaxy0",
+            "type": "tool",
+            "uuid": "36429fec-ca91-44a3-824e-67959453527f",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "anova_ksea_metadata",
+                    "uuid": "a66f2e58-d3df-4ff0-bba3-f77287d189de"
+                },
+                {
+                    "label": null,
+                    "output_name": "ksea_sqlite",
+                    "uuid": "59eb9bf0-a46e-4c8b-bf0c-df809425768b"
+                },
+                {
+                    "label": null,
+                    "output_name": "imp_qn_lt_file",
+                    "uuid": "3164ed68-496c-497f-bdce-32cf75612d52"
+                },
+                {
+                    "label": null,
+                    "output_name": "imputed_data_file",
+                    "uuid": "f258b122-26bc-4d5c-baed-7362e0a73c55"
+                },
+                {
+                    "label": null,
+                    "output_name": "report_file",
+                    "uuid": "49803534-c9be-4405-8a63-1e5f66161dd5"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "gtn-phosphop",
+        "maxquant",
+        "mqppep"
+    ],
+    "uuid": "6bfda02e-233b-4e70-96ac-0f3fcd56dfc1",
+    "version": 5
+}

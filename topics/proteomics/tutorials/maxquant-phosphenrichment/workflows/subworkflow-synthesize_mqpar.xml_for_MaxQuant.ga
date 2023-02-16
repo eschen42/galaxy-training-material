@@ -1,0 +1,873 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Sub-workflow for MaxQuant phosphopeptide enrichment data processing piplene, producing list of mzXML and fully-specified `mqpar.xml` for MaxQuant run",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0002-2882-0508",
+            "name": "Art Eschenlauer"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "synthesize mqpar.xml for MaxQuant",
+    "steps": {
+        "0": {
+            "annotation": "FASTA files of expected experimental and contaminant sequences",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "FASTA files of expected experimental and contaminant sequences",
+                    "name": "FASTA collection"
+                }
+            ],
+            "label": "FASTA collection",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 0.0,
+                "top": 0.0
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"fasta\"], \"tag\": \"\", \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "7c35acf9-1e08-4818-b2c6-4d397595d3d3",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "map names to fraction and experiment",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "map names to fraction and experiment",
+                    "name": "Name-to-Fraction-Experiment Map"
+                }
+            ],
+            "label": "Name-to-Fraction-Experiment Map",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 11.5,
+                "top": 216.96665954589844
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"tabular\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "ff1bebcb-a3e3-4e5f-9426-e5f11567c3f4",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "list of Thermo RAW datasets",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "list of Thermo RAW datasets",
+                    "name": "Thermo RAW collection"
+                }
+            ],
+            "label": "Thermo RAW collection",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 22.95001220703125,
+                "top": 377.68333435058594
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\", \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "b514a2a5-1303-432e-83e3-cff2e1fcb106",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "general MaxQuant settings not concerned with the particulars of FASTA, RAW, or experimental design",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "general MaxQuant settings not concerned with the particulars of FASTA, RAW, or experimental design",
+                    "name": "General MQ settings mqpar.xml"
+                }
+            ],
+            "label": "General MQ settings mqpar.xml",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 36.70001220703125,
+                "top": 618.3499603271484
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "2b0e0d83-f244-4192-8472-176f2caa91d4",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "Extract element IDs from members of dataset collection",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input_collection": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Extract element IDs",
+            "name": "Extract element identifiers",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 264.35003662109375,
+                "top": 473.33335876464844
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                },
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2",
+            "tool_shed_repository": {
+                "changeset_revision": "d3c07d270a50",
+                "name": "collection_element_identifiers",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_collection\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.2",
+            "type": "tool",
+            "uuid": "ed34e17a-8cf3-4813-9f5f-9cf19b484363",
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "adjust FASTA parse rule",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "infile": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "FASTA parse rule adjustment",
+            "name": "Text transformation",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 471.5833435058594,
+                "top": 622.7499847412109
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv_opts\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"code\": \"s:<identifierParseRule>.*<\/identifierParseRule>:<identifierParseRule>^\\\\&gt;([^\\\\s]*)<\/identifierParseRule>:\\ns:<descriptionParseRule>.*<\/descriptionParseRule>:<descriptionParseRule>^\\\\&gt;(.*)<\/descriptionParseRule>:\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "e9a06792-8c00-4922-bfa3-9ad95d694195",
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "chop extension off of file names in column 1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "remove extension from column 1",
+            "name": "Filter Tabular",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 459.15000915527344,
+                "top": 107.0333251953125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.0",
+            "tool_shed_repository": {
+                "changeset_revision": "4d5aae46f850",
+                "name": "filter_tabular",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"comment_char\": \"true\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"linefilters\": [{\"__index__\": 0, \"filter\": {\"filter_type\": \"replace\", \"__current_case__\": 11, \"column\": \"1\", \"regex_pattern\": \"((.thermo)?.raw)\", \"regex_replace\": \"\", \"add\": null}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.3.0",
+            "type": "tool",
+            "uuid": "865aab2f-01eb-476b-8e9b-f472dbad6c80",
+            "workflow_outputs": [
+                {
+                    "label": "elementIDsWithoutExtension",
+                    "output_name": "output",
+                    "uuid": "d7bf7f3b-4556-4b2b-80fb-e4ad3d2e3ac5"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "search and replace names of Thermo RAW datasets",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "add .thermo.raw column",
+            "name": "Filter Tabular",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 764.1166839599609,
+                "top": 462.1333465576172
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.0",
+            "tool_shed_repository": {
+                "changeset_revision": "4d5aae46f850",
+                "name": "filter_tabular",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"comment_char\": \"true\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"linefilters\": [{\"__index__\": 0, \"filter\": {\"filter_type\": \"replace\", \"__current_case__\": 11, \"column\": \"1\", \"regex_pattern\": \"((.thermo)?.raw)\", \"regex_replace\": \".thermo.raw\", \"add\": \"append\"}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.3.0",
+            "type": "tool",
+            "uuid": "34cc34e6-fedd-44f3-a9b8-e8cef5cccba3",
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "fix 'useDotNetCore' setting",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "infile": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "mandate useDotNetCore",
+            "name": "Text transformation",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1237.1500244140625,
+                "top": 625.0999603271484
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv_opts\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"code\": \"s:<useDotNetCore>.*<\/useDotNetCore>:<useDotNetCore>True<\/useDotNetCore>:\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "2d06ad1a-b4f1-48da-a66f-9430d1677708",
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "build experimental design template for MaxQuant",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "infile": {
+                    "id": 6,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "build MQ experimental design Template",
+            "name": "Text transformation",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 718.0333557128906,
+                "top": 94.44999694824219
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv_opts\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"code\": \"1 {\\n    h;\\n    s/.*/Name\\\\tFraction\\\\tExperiment\\\\tPTM/;\\n    p;\\n    g\\n};\\n1,$ {\\n  s/\\\\t/.thermo.raw\\\\t/;\\n  s/$/\\\\t1\\\\tx\\\\tFalse/\\n}\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "32a4b1b8-fcce-458c-8b10-857d99de2ea8",
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "relabel collection (list) of Thermo RAW datasets",
+            "content_id": "__RELABEL_FROM_FILE__",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "how|labels": {
+                    "id": 7,
+                    "output_name": "output"
+                },
+                "input": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Map names to new names",
+            "name": "Relabel identifiers",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1229.4500122070312,
+                "top": 378.21665954589844
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__RELABEL_FROM_FILE__",
+            "tool_state": "{\"how\": {\"how_select\": \"tabular\", \"__current_case__\": 1, \"labels\": {\"__class__\": \"ConnectedValue\"}, \"strict\": \"false\"}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "7e05fa4e-1f20-4928-9464-ca649b6c873a",
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "construct part 2 of 4 of mqpar.xml",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "infile": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "mqpar thorax",
+            "name": "Text transformation",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1600.7000122070312,
+                "top": 593.8833465576172
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv_opts\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"code\": \"1,/[/]fastaFiles/ d;\\n/filePaths/,$ d;\\ns:<useDotNetCore>.*<\/useDotNetCore>:<useDotNetCore>True<\/useDotNetCore>: \", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "567d5a29-95c5-48da-9591-5329b3c2f541",
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "construct part 4 of 4 of mqpar.xml",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "infile": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "mqpar tail",
+            "name": "Text transformation",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1599.2666625976562,
+                "top": 698.3666839599609
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv_opts\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"code\": \"1,/[/]referenceChannel/ d\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "26d3af6b-880d-49ba-a1d1-fac7874da2ef",
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "merge fraction info with experimental design",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.0",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "tables_0|table": {
+                    "id": 9,
+                    "output_name": "output"
+                },
+                "tables_1|table": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Query Tabular",
+                    "name": "add_to_database"
+                }
+            ],
+            "label": "merge Fraction and Experiment",
+            "name": "Query Tabular",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 966.3333435058594,
+                "top": 170.0166473388672
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.0",
+            "tool_shed_repository": {
+                "changeset_revision": "cf34c344508d",
+                "name": "query_tabular",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"add_to_database\": {\"withdb\": {\"__class__\": \"RuntimeValue\"}}, \"addqueries\": {\"queries\": []}, \"modify_database\": {\"sql_stmts\": []}, \"query_result\": {\"header\": \"yes\", \"__current_case__\": 0, \"header_prefix\": \"\"}, \"save_db\": \"false\", \"sqlquery\": \"SELECT\\n  t1.c1 || '.thermo.raw' AS Name,\\n  t2.Fraction,\\n  t2.Experiment,\\n  'False' AS PTM\\nFROM\\n  t1, t2\\nWHERE\\n  t1.c1 = t2.Name\", \"tables\": [{\"__index__\": 0, \"table\": {\"__class__\": \"ConnectedValue\"}, \"input_opts\": {\"linefilters\": []}, \"tbl_opts\": {\"table_name\": \"\", \"column_names_from_first_line\": \"false\", \"col_names\": \"\", \"load_named_columns\": \"false\", \"pkey_autoincr\": \"\", \"indexes\": []}}, {\"__index__\": 1, \"table\": {\"__class__\": \"ConnectedValue\"}, \"input_opts\": {\"linefilters\": []}, \"tbl_opts\": {\"table_name\": \"\", \"column_names_from_first_line\": \"true\", \"col_names\": \"\", \"load_named_columns\": \"false\", \"pkey_autoincr\": \"\", \"indexes\": []}}], \"workdb\": \"workdb.sqlite\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.3.0",
+            "type": "tool",
+            "uuid": "b0378ab5-4578-40e5-b615-162f134e35d7",
+            "workflow_outputs": [
+                {
+                    "label": "Experimental Design",
+                    "output_name": "output",
+                    "uuid": "b73dc283-3ab5-4ba2-a795-86af97659ff7"
+                }
+            ]
+        },
+        "14": {
+            "annotation": "convert Thermo RAW files to mzML",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/thermo_raw_file_converter/thermo_raw_file_converter/1.3.4+galaxy0",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "input_file": {
+                    "id": 10,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Thermo RAW to mzML",
+            "name": "Thermo",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "mzml"
+                }
+            ],
+            "position": {
+                "left": 1596.0333251953125,
+                "top": 213.71665954589844
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/thermo_raw_file_converter/thermo_raw_file_converter/1.3.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "19e45916daf9",
+                "name": "thermo_raw_file_converter",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"allDetectors\": \"false\", \"format_cond\": {\"output_format\": \"1\", \"__current_case__\": 1, \"zlib_boolean\": \"true\", \"peakpicking_boolean\": \"true\"}, \"ignore_instrument_errors_boolean\": \"true\", \"includeExceptionData\": \"false\", \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"msLevel\": \"\", \"output_metadata_selector\": \"off\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.3.4+galaxy0",
+            "type": "tool",
+            "uuid": "219ebd79-d050-4e25-8b87-f5aae672cfaf",
+            "workflow_outputs": []
+        },
+        "15": {
+            "annotation": "use OpenMS FileConverter to transform mzML into MaxQuant-compatible mzXML",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileconverter/FileConverter/2.6+galaxy0",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "in": {
+                    "id": 14,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Convert to MaxQuant-indexed mzXML",
+            "name": "FileConverter",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 1938.566650390625,
+                "top": 34.683319091796875
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionout": {
+                    "action_arguments": {
+                        "newtype": "mzxml"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileconverter/FileConverter/2.6+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "9b7977080f6d",
+                "name": "openms_fileconverter",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": null, \"adv_opts_cond\": {\"adv_opts_selector\": \"advanced\", \"__current_case__\": 1, \"UID_postprocessing\": \"ensure\", \"TIC_DTA2D\": \"false\", \"MGF_compact\": \"false\", \"force_MaxQuant_compatibility\": \"true\", \"convert_to_chromatograms\": \"false\", \"force_TPP_compatibility\": \"false\", \"change_im_format\": \"none\", \"write_scan_index\": \"true\", \"lossy_compression\": \"false\", \"lossy_mass_accuracy\": \"-1.0\", \"process_lowmemory\": \"false\", \"no_peak_picking\": \"false\", \"force\": \"false\", \"test\": \"False\"}, \"in\": {\"__class__\": \"ConnectedValue\"}, \"out_type\": \"mzXML\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "ce1296e1-defc-4efe-971e-d23e42fd8b7f",
+            "workflow_outputs": [
+                {
+                    "label": "listOfMzXML",
+                    "output_name": "out",
+                    "uuid": "2cf1b4a1-f70a-4814-bde7-885f72a255d8"
+                }
+            ]
+        },
+        "16": {
+            "annotation": "use MaxQuant to generate mqpar.xml",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.17.0+galaxy6",
+            "errors": null,
+            "id": 16,
+            "input_connections": {
+                "input_opts|fasta_files": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "paramGroups_0|files": {
+                    "id": 15,
+                    "output_name": "out"
+                },
+                "search_opts|template": {
+                    "id": 13,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "MaxQuant generate mqpar.xml",
+            "name": "MaxQuant",
+            "outputs": [
+                {
+                    "name": "mqpar",
+                    "type": "xml"
+                }
+            ],
+            "position": {
+                "left": 1248.4166870117188,
+                "top": 3.183319091796875
+            },
+            "post_job_actions": {
+                "HideDatasetActionmqpar": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "mqpar"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.17.0+galaxy6",
+            "tool_shed_repository": {
+                "changeset_revision": "4d17fcdeb8ff",
+                "name": "maxquant",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_opts\": {\"ftype\": \".mzxml\", \"fasta_files\": {\"__class__\": \"ConnectedValue\"}, \"identifier_parse_rule\": \">([^\\\\s]*)\", \"description_parse_rule\": \">(.*)\"}, \"output_opts\": {\"dry_run\": \"true\", \"output\": [\"mqpar\"]}, \"paramGroups\": [{\"__index__\": 0, \"files\": {\"__class__\": \"ConnectedValue\"}, \"maxMissedCleavages\": \"2\", \"fixedModifications\": [\"Carbamidomethyl (C)\"], \"variableModifications\": [\"Oxidation (M)\", \"Acetyl (Protein N-term)\", \"Phospho (STY)\"], \"enzymes\": [\"Trypsin/P\"], \"digestion_mode\": \"0\", \"quant_method\": {\"select_quant_method\": \"\", \"__current_case__\": 0}}], \"protein_quant\": {\"peptides_for_quantification\": \"1\", \"only_unmod_prot\": {\"unmod_prot\": \"True\", \"__current_case__\": 0, \"mods_used_prot_quant\": [\"Carbamidomethyl (C)\"], \"discard_unmod_cpart_peptides\": \"false\"}, \"lfq_opts\": {\"separateLfq\": \"false\", \"lfqStabilizeLargeRatios\": \"true\", \"lfqRequireMsms\": \"true\", \"do_ibaq\": {\"ibaq\": \"False\", \"__current_case__\": 1}, \"advancedSiteIntensities\": \"true\"}}, \"qc\": {\"do_it\": \"false\", \"__current_case__\": 1}, \"search_opts\": {\"template\": {\"__class__\": \"ConnectedValue\"}, \"min_peptide_len\": \"7\", \"max_peptide_mass\": \"4600\", \"min_unique_pep\": \"0\", \"calc_peak_properties\": \"true\", \"mbr\": {\"match_between_runs\": \"True\", \"__current_case__\": 1, \"matching_time_window\": \"5.0\", \"matching_ion_mobility_window\": \"0.05\", \"alignment_time_window\": \"20\", \"alignment_ion_mobility_window\": \"1\", \"match_unidentified_features\": \"false\"}, \"incl_contaminants\": \"true\", \"decoy_mode\": \"revert\", \"psm_fdr\": \"0.01\", \"protein_fdr\": \"0.01\", \"min_pep_length\": \"8\", \"max_pep_length\": \"25\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.6.17.0+galaxy6",
+            "type": "tool",
+            "uuid": "595021b3-87a8-4e77-a8bb-5a6612469f9e",
+            "workflow_outputs": []
+        },
+        "17": {
+            "annotation": "generate part 1 of 4 of mqpar.xml",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+            "errors": null,
+            "id": 17,
+            "input_connections": {
+                "infile": {
+                    "id": 16,
+                    "output_name": "mqpar"
+                }
+            },
+            "inputs": [],
+            "label": "mqpar head",
+            "name": "Text transformation",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1596.066650390625,
+                "top": 359.7999725341797
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv_opts\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"code\": \"/fastaFilesProteogenomics/,$ d \", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "16edd7ab-c8dd-44b8-81b1-0cacb505ed04",
+            "workflow_outputs": []
+        },
+        "18": {
+            "annotation": "generate part 3 of 4 of mqpar.xml",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+            "errors": null,
+            "id": 18,
+            "input_connections": {
+                "infile": {
+                    "id": 16,
+                    "output_name": "mqpar"
+                }
+            },
+            "inputs": [],
+            "label": "mqpar abdomen",
+            "name": "Text transformation",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1602.050048828125,
+                "top": 467.34996032714844
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv_opts\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"code\": \"1,/[/]profilePerformance/ d;\\n/intensPred/,$ d \", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "c87e7b6d-fdd7-42a7-9a86-d97f12f1fa76",
+            "workflow_outputs": []
+        },
+        "19": {
+            "annotation": "concatenate parts of mqpar.xml to produce whole mqpar.xml",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "inputs": {
+                    "id": 17,
+                    "output_name": "output"
+                },
+                "queries_0|inputs2": {
+                    "id": 11,
+                    "output_name": "output"
+                },
+                "queries_1|inputs2": {
+                    "id": 18,
+                    "output_name": "output"
+                },
+                "queries_2|inputs2": {
+                    "id": 12,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "splice mqpar",
+            "name": "Concatenate datasets",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1924.433349609375,
+                "top": 585.8166351318359
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "d698c222f354",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"inputs\": {\"__class__\": \"ConnectedValue\"}, \"queries\": [{\"__index__\": 0, \"inputs2\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"inputs2\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 2, \"inputs2\": {\"__class__\": \"ConnectedValue\"}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.1",
+            "type": "tool",
+            "uuid": "28db03a5-ef94-48ca-b50d-7f7320f8bf60",
+            "workflow_outputs": [
+                {
+                    "label": "spliced mqpar.xml",
+                    "output_name": "out_file1",
+                    "uuid": "c1718779-d03b-4afc-97ea-0681660d66f3"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "mqppep",
+        "gtn-phosphopep",
+        "maxquant"
+    ],
+    "uuid": "d6877bd3-7c8e-4b10-8e2d-5f1040eb8a67",
+    "version": 2
+}
