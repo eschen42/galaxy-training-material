@@ -28,7 +28,7 @@
             "name": "Input dataset collection",
             "outputs": [],
             "position": {
-                "left": 0.0,
+                "left": 0,
                 "top": 0.0
             },
             "tool_id": null,
@@ -55,7 +55,7 @@
             "outputs": [],
             "position": {
                 "left": 11.5,
-                "top": 216.96665954589844
+                "top": 216.9666748046875
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"format\": [\"tabular\"], \"tag\": \"\"}",
@@ -81,7 +81,7 @@
             "outputs": [],
             "position": {
                 "left": 22.95001220703125,
-                "top": 377.68333435058594
+                "top": 377.683349609375
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": \"\", \"collection_type\": \"list\"}",
@@ -107,7 +107,7 @@
             "outputs": [],
             "position": {
                 "left": 36.70001220703125,
-                "top": 618.3499603271484
+                "top": 618.3499755859375
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": \"\"}",
@@ -137,8 +137,8 @@
                 }
             ],
             "position": {
-                "left": 264.35003662109375,
-                "top": 473.33335876464844
+                "left": 264.3500061035156,
+                "top": 473.33331298828125
             },
             "post_job_actions": {
                 "ChangeDatatypeActionoutput": {
@@ -188,8 +188,8 @@
                 }
             ],
             "position": {
-                "left": 471.5833435058594,
-                "top": 622.7499847412109
+                "left": 471.5833282470703,
+                "top": 622.75
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -232,8 +232,8 @@
                 }
             ],
             "position": {
-                "left": 459.15000915527344,
-                "top": 107.0333251953125
+                "left": 459.1499938964844,
+                "top": 107.03334045410156
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.0",
@@ -251,7 +251,7 @@
                 {
                     "label": "elementIDsWithoutExtension",
                     "output_name": "output",
-                    "uuid": "d7bf7f3b-4556-4b2b-80fb-e4ad3d2e3ac5"
+                    "uuid": "1b9930d5-687e-44fc-b0cf-1907bf99349c"
                 }
             ]
         },
@@ -276,8 +276,8 @@
                 }
             ],
             "position": {
-                "left": 764.1166839599609,
-                "top": 462.1333465576172
+                "left": 764.1166687011719,
+                "top": 462.13330078125
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -321,7 +321,7 @@
             ],
             "position": {
                 "left": 1237.1500244140625,
-                "top": 625.0999603271484
+                "top": 625.0999755859375
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -364,7 +364,7 @@
                 }
             ],
             "position": {
-                "left": 718.0333557128906,
+                "left": 718.0333251953125,
                 "top": 94.44999694824219
             },
             "post_job_actions": {
@@ -413,7 +413,7 @@
             ],
             "position": {
                 "left": 1229.4500122070312,
-                "top": 378.21665954589844
+                "top": 378.2166748046875
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -450,8 +450,8 @@
                 }
             ],
             "position": {
-                "left": 1600.7000122070312,
-                "top": 593.8833465576172
+                "left": 1600.699951171875,
+                "top": 593.88330078125
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -494,8 +494,8 @@
                 }
             ],
             "position": {
-                "left": 1599.2666625976562,
-                "top": 698.3666839599609
+                "left": 1599.2666015625,
+                "top": 698.36669921875
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -547,8 +547,8 @@
                 }
             ],
             "position": {
-                "left": 966.3333435058594,
-                "top": 170.0166473388672
+                "left": 966.3333129882812,
+                "top": 170.01666259765625
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.0",
@@ -566,7 +566,7 @@
                 {
                     "label": "Experimental Design",
                     "output_name": "output",
-                    "uuid": "b73dc283-3ab5-4ba2-a795-86af97659ff7"
+                    "uuid": "f9eae195-654f-4b23-9867-80ae1552b0a7"
                 }
             ]
         },
@@ -592,7 +592,7 @@
             ],
             "position": {
                 "left": 1596.0333251953125,
-                "top": 213.71665954589844
+                "top": 213.7166748046875
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -636,7 +636,7 @@
             ],
             "position": {
                 "left": 1938.566650390625,
-                "top": 34.683319091796875
+                "top": 34.68333435058594
             },
             "post_job_actions": {
                 "ChangeDatatypeActionout": {
@@ -662,13 +662,13 @@
                 {
                     "label": "listOfMzXML",
                     "output_name": "out",
-                    "uuid": "2cf1b4a1-f70a-4814-bde7-885f72a255d8"
+                    "uuid": "bbcdf4a0-c534-4c39-8ae7-5ee71e73c152"
                 }
             ]
         },
         "16": {
             "annotation": "use MaxQuant to generate mqpar.xml",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.17.0+galaxy6",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.17.0+galaxy7",
             "errors": null,
             "id": 16,
             "input_connections": {
@@ -696,7 +696,7 @@
             ],
             "position": {
                 "left": 1248.4166870117188,
-                "top": 3.183319091796875
+                "top": 3.1833343505859375
             },
             "post_job_actions": {
                 "HideDatasetActionmqpar": {
@@ -705,15 +705,15 @@
                     "output_name": "mqpar"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.17.0+galaxy6",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.17.0+galaxy7",
             "tool_shed_repository": {
-                "changeset_revision": "4d17fcdeb8ff",
+                "changeset_revision": "837224ad1694",
                 "name": "maxquant",
                 "owner": "galaxyp",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"input_opts\": {\"ftype\": \".mzxml\", \"fasta_files\": {\"__class__\": \"ConnectedValue\"}, \"identifier_parse_rule\": \">([^\\\\s]*)\", \"description_parse_rule\": \">(.*)\"}, \"output_opts\": {\"dry_run\": \"true\", \"output\": [\"mqpar\"]}, \"paramGroups\": [{\"__index__\": 0, \"files\": {\"__class__\": \"ConnectedValue\"}, \"maxMissedCleavages\": \"2\", \"fixedModifications\": [\"Carbamidomethyl (C)\"], \"variableModifications\": [\"Oxidation (M)\", \"Acetyl (Protein N-term)\", \"Phospho (STY)\"], \"enzymes\": [\"Trypsin/P\"], \"digestion_mode\": \"0\", \"quant_method\": {\"select_quant_method\": \"\", \"__current_case__\": 0}}], \"protein_quant\": {\"peptides_for_quantification\": \"1\", \"only_unmod_prot\": {\"unmod_prot\": \"True\", \"__current_case__\": 0, \"mods_used_prot_quant\": [\"Carbamidomethyl (C)\"], \"discard_unmod_cpart_peptides\": \"false\"}, \"lfq_opts\": {\"separateLfq\": \"false\", \"lfqStabilizeLargeRatios\": \"true\", \"lfqRequireMsms\": \"true\", \"do_ibaq\": {\"ibaq\": \"False\", \"__current_case__\": 1}, \"advancedSiteIntensities\": \"true\"}}, \"qc\": {\"do_it\": \"false\", \"__current_case__\": 1}, \"search_opts\": {\"template\": {\"__class__\": \"ConnectedValue\"}, \"min_peptide_len\": \"7\", \"max_peptide_mass\": \"4600\", \"min_unique_pep\": \"0\", \"calc_peak_properties\": \"true\", \"mbr\": {\"match_between_runs\": \"True\", \"__current_case__\": 1, \"matching_time_window\": \"5.0\", \"matching_ion_mobility_window\": \"0.05\", \"alignment_time_window\": \"20\", \"alignment_ion_mobility_window\": \"1\", \"match_unidentified_features\": \"false\"}, \"incl_contaminants\": \"true\", \"decoy_mode\": \"revert\", \"psm_fdr\": \"0.01\", \"protein_fdr\": \"0.01\", \"min_pep_length\": \"8\", \"max_pep_length\": \"25\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.6.17.0+galaxy6",
+            "tool_version": "1.6.17.0+galaxy7",
             "type": "tool",
             "uuid": "595021b3-87a8-4e77-a8bb-5a6612469f9e",
             "workflow_outputs": []
@@ -740,7 +740,7 @@
             ],
             "position": {
                 "left": 1596.066650390625,
-                "top": 359.7999725341797
+                "top": 359.79998779296875
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -784,7 +784,7 @@
             ],
             "position": {
                 "left": 1602.050048828125,
-                "top": 467.34996032714844
+                "top": 467.3499755859375
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -840,7 +840,7 @@
             ],
             "position": {
                 "left": 1924.433349609375,
-                "top": 585.8166351318359
+                "top": 585.816650390625
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
@@ -858,7 +858,7 @@
                 {
                     "label": "spliced mqpar.xml",
                     "output_name": "out_file1",
-                    "uuid": "c1718779-d03b-4afc-97ea-0681660d66f3"
+                    "uuid": "944885bf-edfa-4b88-9dcd-b96d37540c13"
                 }
             ]
         }
@@ -868,6 +868,6 @@
         "gtn-phosphopep",
         "maxquant"
     ],
-    "uuid": "d6877bd3-7c8e-4b10-8e2d-5f1040eb8a67",
-    "version": 2
+    "uuid": "02df166f-aea4-4d36-b783-1d070b26a68a",
+    "version": 4
 }
