@@ -536,11 +536,11 @@ A second option is to run the "Quant" partial workflow and postpone running the 
 > 4. Wait a *long* time.  (Perhaps surprisingly) you can monitor progress of MaxQuant by looking at the contents of the (running) dataset:
 >    - {% icon param-file %} `VIEW PROGRESS HERE`.
 >
-> 5. The output datasets of immediate interest are:
->    - {% icon param-file %} `phospho_STY_sites.txt`, which  you will take to the Postprocessing workflow.
->    - {% icon param-file %} `PTXQC_report`; to determine how quality considerations from this report should influence your subsequent analysis, study {% cite Bielow_2016 %} carefully; FYI, this has nothing to do with the "quality score" computed for KSEA.
->
 {: .hands_on}
+
+The output datasets of immediate interest are:
+- {% icon param-file %} `phospho_STY_sites.txt`, which  you will take to the Postprocessing workflow.
+- {% icon param-file %} `PTXQC_report`; to determine how quality considerations from this report should influence your subsequent analysis, study {% cite Bielow_2016 %} carefully; FYI, this has nothing to do with the "quality score" computed for KSEA.
 
 # Postprocessing workflow
 
@@ -585,20 +585,50 @@ After the pipeline has run, each of these substeps may be re-run with changed pa
 >
 {: .hands_on}
 
+
+The output datasets of the preprocessing phase are:
+- `phosphoPeptideIntensities` - data matrix of intensities for each phosphopeptide for each sample.
+- `enrichGraph` - a PDF graph categorizing the relative frequency at which S, T, and Y residues are phosphorylated.
+- `enrichGraph_svg` - an SVG version of `enrichGraph` for incorporation into documents.
+- `locProbCutoffGraph` - a PDF graph showing the proportions of inclusion and exclusion of phosphopeptides on the basis of their localization probability scores.
+- `locProbCutoffGraph_svg` - an SVG version of `locProbCutoffGraph` for incorporation into documents.
+- `filteredData_tabular` - data table (in tabular format) comprising rows of the phosphSites input file that are not flagged as contaminants or reversed sequences.
+- `quantData_tabular` - data table (in tabular format) comprising rows of the filteredData file whose localization probability exceeds the Localization Probability Cutoff parameter.
+- `mapped_phosphopeptides` - data table (in tabular format) presenting, for each phosphopeptide, the kinase mappings, the mass-spectral intensities for each sample, and the metadata from UniProtKB/SwissProt, phospho-sites, phospho-motifs, and regulatory sites. Data in the columns marked "Domain", "ON\_...", or "...\_PhosphoSite" are available subject to the following terms:
+  - "PhosphoSitePlus&reg; (PSP) was created by Cell Signaling Technology Inc. It is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License (https://creativecommons.org/licenses/by-nc-sa/3.0/). When using PSP data or analyses in printed publications or in online resources, the following acknowledgements must be included: (a) the words 'PhosphoSitePlus(R), www.phosphosite.org' must be included at appropriate places in the text or webpage, and (b) citation of [Hornbeck 2011 (PMID: 25514926)] must be included in the bibliography."
+- `preproc_tab` - phosphopeptides annotated with SwissProt and phosphosite metadata, in tabular format. This file is designed to be consumed by the downstream ANOVA tool. Some data in the columns marked "PSP" are available subject to the PhosphoSitePlus terms above.
+- `preproc_csv` - phosphopeptides annotated with SwissProt and phosphosite metadata, in CSV format.
+- `preproc_sqlite` - SQLite version of `preproc_tab`/`preproc_csv`, augmented with annotations, used by the ANOVA/KSEA tool.
+
+The output datasets of the ANOVA/KSEA phase are:
+- `ANOVA_KSEA_report` - a PDF report including and visualizing:
+  - Assignments of samples to treatment-classes.
+  - An assessment of the similarity of phosphopeptide intensity distributions among samples.
+  - An assessment of whether phosphopeptide intensities are distributed unimodally.
+  - Distribution of the standard deviations of phosphopeptide intensities.
+  - The method and effect of imputing missing values.
+  - The effect of quantile normalization of phosphopeptide intensities.
+  - ANOVA analysis of phosphopeptide intensities, including a heatmap for the 50 peptides having the lowest adjusted *p*-value less than specified in the `alpha_thresholds` file.
+  - Kinase-Substrate Enrichment Analysis results, including *z*-score and FDR for each kinase and, for each kinase, a table, heatmap, and covariance-heatmap of up to 50 substrates.
+- `imp_qn_lt_file` - a tabular file presenting imputed, quantile-normalized, log-transformed phosphopeptide intensities, together with some annotation.
+- `imputed_data_file` - a tabular file presenting the imputed data without quantile-normalization or log-transformation, together with some annotation.
+- `anova_ksea_metadata` - the same annotation plus ANOVA raw and adjusted *p*-values and associated kinases (or motifs) found to be enriched.
+- `ksea_sqlite` - SQLite database containing most of the analysis results and annotation for *ad hoc* analysis.
+
 # Preprocessing Notes
 
 The parameters for `MaxQuant Phosphopeptide Preprocessing` are described in the tool help, which you may also see in the [**tool description**](https://toolshed.g2.bx.psu.edu/repository/display_tool?repository_id=7b866682d0b1d44c&tool_config=%2Fsrv%2Ftoolshed-repos%2Fmain%2F006%2Frepo_6289%2Fmqppep_preproc.xml&changeset_revision=b889e05ce77d&render_repository_actions_for=tool_shed).
 
 Most of the parameters would only require alteration if the defaults are not effective for parsing of the `Phospho (STY)Sites.txt` produced by MaxQuant. However:
 
-- You can use the "localization probability cutoff" parameter, which, when increased, decreases the number of phosphopeptides quantitated by requiring greater certainty regarding which residues are more likely phosphorylated.
-- You can choose whether to sum or average the intensities of several alternative phosphorylations of one peptide.
+- You can use the `Localization probability cutoff` parameter, which, when increased, decreases the number of phosphopeptides quantitated by requiring greater certainty regarding which residues are more likely phosphorylated.
+- You can use the `Intensity merge-function` parameter to choose whether to sum or average the intensities of several alternative phosphorylations of one peptide.
 
 # Statistical Notes
 
 The parameters for `MaxQuant Phosphopeptide ANOVA` (which also does KSEA) are described in the tool help, which you may also see in the [**tool description**](https://toolshed.g2.bx.psu.edu/repository/display_tool?repository_id=fd3fde90cd863d18&tool_config=%2Fsrv%2Ftoolshed-repos%2Fmain%2F006%2Frepo_6288%2Fmqppep_anova.xml&changeset_revision=514afed1f40d&render_repository_actions_for=tool_shed).
 
-- Considerations regarding the choice for `Imputation method`: Different methods of imputation are appropriate for different downstream statistical analyses.  Although small random value imputation is the most appropriate method for some univariate data, it perturbs the "center" of multivariate data; applying the median intensity for the treatment for a missing peptide intensity will not (negatively) disturb the sampled between treatments, whereas applying the median across all treatments will not exaggerate the separation of treatments in multivariate space.
+- Considerations regarding the choice for the `Imputation method` parameter: Different methods of imputation are appropriate for different downstream statistical analyses.  Although small random value imputation is the most appropriate method for some univariate data, it perturbs the "center" of multivariate data; applying the median intensity for the treatment for a missing peptide intensity will not (negatively) disturb the sampled between treatments, whereas applying the median across all treatments will not exaggerate the separation of treatments in multivariate space.
 - `Sample-name extraction pattern` and `Sample-group extraction pattern` are PERL-compatible regular expressions that presume the sample group to be embedded in the sample name.  If necessary, you will need to name (or rename) your samples in a manner that facilitates writing these expressions.  The default values for these expressions extract as the sample group the alphabetic portion of names like ".C2", where "C" is the sample group (i.e., the treatment) and "2" is the replicate number.
 - You can use `Minimum number of values per sample-group` to remove from the analysis peptides that are poorly represented in some sample groups.
 - You can use `Filter sample-groups` to remove from your analysis sample-groups that you do not wish to be considered, e.g., quality-control samples.
