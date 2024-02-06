@@ -514,6 +514,8 @@ A second option is to run the "Quant" partial workflow and postpone running the 
 > 2. **Set up the workflow invocation**
 >    > {% snippet faqs/galaxy/workflows_run.md %}
 >
+>    Before proceeding, click the "Expand to full workflow form." link at the bottom of the form so that you can send results to a new history.
+>
 >    Enter the following parameters:
 >
 >    > | Input                                                   | Value                                             |
@@ -523,7 +525,7 @@ A second option is to run the "Quant" partial workflow and postpone running the 
 >    > | {% icon param-file %} `FASTA valid phosphopeptides`     | `HumanProteome_UP000005640_AllIsozymes.fasta`     |
 >    > | {% icon param-file %} `FASTA contaminants`              | `common Repository of Adventitious Proteins.fasta`|
 >    > | `[PARAM] FASTA id parse rule`                           | `>([^\s]*)`                                       |
->    > | `[PARAM] FASTA desc parse rule`                         | `>(*)`                                            |
+>    > | `[PARAM] FASTA desc parse rule`                         | `>(.*)`                                           |
 >    > | {% icon param-file %} `Name-to-Fraction-Experiment Map` | `name2fracexpt_for_pST.tabular`                   |
 >    > | {% icon param-file %} `Thermo RAW collection`           | `pST Thermo RAW`                                  |
 >    > | {% icon param-file %} `General mqpar.xml`               | `mqpar.xml`                                       |
